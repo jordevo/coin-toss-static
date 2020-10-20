@@ -6,9 +6,5 @@ export default function NotFound() {
     setReady(true);
   }, []);
 
-  return ready ? (
-    <div>
-      <h1>404 - Page Not Found</h1>
-    </div>
-  ) : null;
+  return ready ? <></> : null;
 }

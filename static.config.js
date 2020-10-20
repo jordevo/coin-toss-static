@@ -6,5 +6,39 @@
 // Get started at https://react-static.js.org
 
 export default {
-  maxThreads: 1, // Remove this when you start doing any static generation
+  entry: "index.js",
+  getRoutes: async ({ dev }) => [
+    {
+      path: "/",
+      template: "src/EmptyCase",
+    },
+    {
+      path: "coin",
+      template: "src/CoinDefault",
+    },
+    {
+      path: "coin/seventails",
+      template: "src/CoinDefaultSeventails",
+    },
+    {
+      path: "trump",
+      template: "src/CoinTrump",
+    },
+    {
+      path: "trump/seventails",
+      template: "src/CoinTrumpSeventails",
+    },
+    {
+      path: "shapes",
+      template: "src/CoinShapes",
+    },
+    {
+      path: "shapes/seventails",
+      template: "src/CoinShapesSeventails",
+    },
+    {
+      path: "404",
+      template: "src/NotFound",
+    },
+  ],
 };

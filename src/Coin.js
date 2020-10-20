@@ -153,7 +153,7 @@ export const Coin = ({
       dispatch({ type: ACTIONS.TOSS_COIN_UNTIL_TAILS_RESET });
       dispatch({
         type: ACTIONS.SUCCESS_MESSAGE_UPDATE,
-        payload: `You got 7 ${coinStateLiterals[COIN_STATE.TAILS]} in a row.`,
+        payload: `You got 7 ${coinStateLiterals[COIN_STATE.TAILS]} in a row`,
       });
     } else {
       setTimeout(() => {
@@ -173,7 +173,7 @@ export const Coin = ({
     if (!state.tossCoin && state.results.length >= 1) {
       dispatch({
         type: ACTIONS.SUCCESS_MESSAGE_UPDATE,
-        payload: `You got ${coinStateLiterals[state.coinState]}.`,
+        payload: `You got ${coinStateLiterals[state.coinState]}`,
       });
       dispatch({
         type: ACTIONS.CONSOLE_MESSAGE_UPDATE,
