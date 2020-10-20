@@ -150,7 +150,7 @@ export const Coin = ({
       dispatch({ type: ACTIONS.TOSS_COIN_UNTIL_TAILS_RESET });
       dispatch({
         type: ACTIONS.SUCCESS_MESSAGE_UPDATE,
-        payload: `You got it! it took ${state.results.length} tosses.`,
+        payload: `You got 7 ${coinStateLiterals[COIN_STATE.TAILS]} in a row.`,
       });
     } else {
       setTimeout(() => {
@@ -167,26 +167,11 @@ export const Coin = ({
   ]);
 
   useEffect(() => {
-    if (
-      !state.tossCoin &&
-      !state.tossCoinUntilTails &&
-      state.results.length === 1
-    ) {
+    if (!state.tossCoin && state.results.length >= 1) {
       dispatch({
         type: ACTIONS.SUCCESS_MESSAGE_UPDATE,
         payload: `You got ${coinStateLiterals[state.coinState]}.`,
       });
-    }
-  }, [
-    state.coinState,
-    state.results,
-    state.tossCoin,
-    state.tossCoinUntilTails,
-    coinStateLiterals,
-  ]);
-
-  useEffect(() => {
-    if (!state.tossCoin && state.results.length >= 1) {
       dispatch({
         type: ACTIONS.CONSOLE_MESSAGE_UPDATE,
         payload: coinStateLiterals[state.coinState],
