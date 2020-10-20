@@ -41,4 +41,5 @@ export default {
       template: "src/NotFound",
     },
   ],
+  basePath: "cpimienta/coin",
 };
