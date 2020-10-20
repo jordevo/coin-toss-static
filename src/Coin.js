@@ -1,3 +1,5 @@
+const isServer = typeof window === "undefined";
+if (!isServer) require("web-animations-js");
 import React, { useEffect, useReducer, useRef } from "react";
 import cx from "classnames";
 import styled from "styled-components";
