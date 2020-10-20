@@ -1,0 +1,170 @@
+body {
+  overflow-x: hidden;
+}
+
+.App {
+  margin: auto;
+  text-align: center;
+  width: 100vw;
+}
+
+.App-content {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.buttons-container {
+  align-items: stretch;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 375px;
+}
+.coin-container {
+  position: relative;
+  height: 400px;
+  width: 375px;
+}
+
+.coin-heads {
+  display: block;
+  width: 375px;
+  height: 375px;
+  margin: auto;
+  backface-visibility: hidden;
+  background-image: url("./img/heads.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  transform-style: preserve-3d;
+  top: 20px;
+  left: 0px;
+  z-index: 2;
+  transform-style: preserve-3d;
+}
+
+.coin-heads.coin-heads-trump {
+  background-image: url("./img/headsTrump.png");
+}
+
+.coin-heads.coin-heads-shapes {
+  background-image: url("./img/square.png");
+}
+
+/*
+.coin-heads:after {
+  background-color: #725d01;
+  background-image: -webkit-linear-gradient(
+    hsla(25, 35%, 68%, 0.25),
+    hsla(0, 0%, 0%, 0.25)
+  );
+  bottom: 0;
+  content: "";
+  left: 190px;
+  position: absolute;
+  top: 0;
+  transform: rotateY(-90deg);
+  transform-origin: 100% 50%;
+  width: 20px;
+  z-index: -10;
+}
+
+.coin-heads:before {
+  backface-visibility: hidden;
+  background-color: #725d01;
+  background-image: -webkit-linear-gradient(
+    hsla(25, 35%, 68%, 0.25),
+    hsla(0, 0%, 0%, 0.25)
+  );
+  border-radius: 100%;
+  content: "";
+  height: 360px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(-10px);
+  transform-origin: 100% 50%;
+  width: 360px;
+}*/
+
+.coin-tails {
+  display: block;
+  width: 375px;
+  height: 375px;
+  margin: auto;
+  backface-visibility: hidden;
+  background-image: url("./img/tails.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
+.coin-tails.coin-tails-trump {
+  background-image: url("./img/tailsTrump.png");
+}
+
+.coin-tails.coin-tails-shapes {
+  background-image: url("./img/circle.png");
+}
+
+/*
+.coin-tails:after {
+  background-color: #caa992;
+  background-image: -webkit-linear-gradient(
+    hsla(25, 35%, 68%, 0.25),
+    hsla(0, 0%, 0%, 0.25)
+  );
+  bottom: 0;
+  content: "";
+  left: 180px;
+  position: absolute;
+  top: 0;
+  transform: rotateY(-90deg);
+  transform-origin: 100% 50%;
+  width: 20px;
+  z-index: -10;
+}
+
+.coin-tails:before {
+  backface-visibility: hidden;
+  background-color: #caa992;
+  background-image: -webkit-linear-gradient(
+    hsla(25, 35%, 68%, 0.25),
+    hsla(0, 0%, 0%, 0.25)
+  );
+  border-radius: 100%;
+  content: "";
+  height: 360px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(-20px);
+  transform-origin: 100% 50%;
+  width: 360px;
+}
+*/
+
+/* media queries */
+
+@media screen and (min-width: 480px) {
+  .App {
+    max-width: 80vw;
+  }
+  .App-content {
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .App {
+    max-width: 60vw;
+  }
+}
