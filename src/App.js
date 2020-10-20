@@ -1,35 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router } from "@reach/router";
 import { Coin } from "./Coin";
 import "./App.css";
 
+const EmptyCase = () => <></>;
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <section className="App-content">
-          <Route exact path="/coin/seventails">
-            <Coin sevenTails />
-          </Route>
-          <Route exact path="/coin">
-            <Coin />
-          </Route>
-          <Route exact path="/trump/seventails">
-            <Coin sevenTails showTrump />
-          </Route>
-          <Route exact path="/trump">
-            <Coin showTrump />
-          </Route>
-          <Route exact path="/shapes/seventails">
-            <Coin sevenTails showShapes />
-          </Route>
-          <Route exact path="/shapes">
-            <Coin showShapes />
-          </Route>
-          <Route path="/" component={() => <></>} />
-        </section>
-      </div>
-    </Router>
+    <div className="App">
+      <section className="App-content">
+        <Router>
+          <Coin sevenTails path="/coin/seventails" />
+          <Coin path="/coin" />
+          <Coin sevenTails showTrump path="/trump/seventails" />
+          <Coin showTrump path="/trump" />
+          <Coin sevenTails showShapes path="/shapes/seventails" />
+          <Coin showShapes path="/shapes" />
+          <EmptyCase path="/" />
+        </Router>
+      </section>
+    </div>
   );
 }
 

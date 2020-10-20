@@ -34,6 +34,7 @@ const ResultsConsole = styled.div`
   color: darkgray;
   height: 3em;
   margin: 0.5em 1em;
+  max-width: 300px;
   overflow: hidden;
   overflow-y: scroll;
   padding: 0.5em;
