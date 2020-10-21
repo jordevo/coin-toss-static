@@ -59,8 +59,8 @@ const ResultNotification = styled.div`
 `;
 
 const COIN_STATE_LITERALS = {
-  DEFAULT: { [COIN_STATE.HEADS]: "heads", [COIN_STATE.TAILS]: "tails" },
-  SHAPES: { [COIN_STATE.HEADS]: "square", [COIN_STATE.TAILS]: "circle" },
+  DEFAULT: { [COIN_STATE.HEADS]: "HEADS", [COIN_STATE.TAILS]: "TAILS" },
+  SHAPES: { [COIN_STATE.HEADS]: "SQUARE", [COIN_STATE.TAILS]: "CIRCLE" },
   TRUMP: { [COIN_STATE.HEADS]: "GO-TRUMP!", [COIN_STATE.TAILS]: "BAN-TRUMP!" },
 };
 
@@ -179,8 +179,9 @@ export const Coin = ({
         type: ACTIONS.CONSOLE_MESSAGE_UPDATE,
         payload: coinStateLiterals[state.coinState],
       });
-      resultsConsoleElement.current.scrollTop =
-        resultsConsoleElement.current.scrollHeight;
+      if (resultsConsoleElement.current)
+        resultsConsoleElement.current.scrollTop =
+          resultsConsoleElement.current.scrollHeight;
     }
   }, [state.coinState, state.results, state.tossCoin, coinStateLiterals]);
 
@@ -241,12 +242,14 @@ export const Coin = ({
           <></>
         )}
       </ResultNotification>
-      {Boolean(state.consoleMessage.length) && (
-        <h5 style={{ margin: 0 }}>Outcome history:</h5>
+      {sevenTails && Boolean(state.consoleMessage.length) && (
+        <>
+          <h5 style={{ margin: 0 }}>Outcome history:</h5>
+          <ResultsConsole ref={resultsConsoleElement}>
+            {state.consoleMessage}
+          </ResultsConsole>
+        </>
       )}
-      <ResultsConsole ref={resultsConsoleElement}>
-        {state.consoleMessage}
-      </ResultsConsole>
     </>
   );
 };
