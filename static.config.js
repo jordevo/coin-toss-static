@@ -42,4 +42,12 @@ export default {
     },
   ],
   basePath: "cpimienta/coin",
+  webpack: (config) => {
+    config.entry = [
+      "babel-polyfill",
+      "core-js/web/url",
+      ...(Array.isArray(config.entry) ? config.entry : [config.entry]),
+    ];
+    return config;
+  },
 };
