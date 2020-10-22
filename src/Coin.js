@@ -177,7 +177,10 @@ export const Coin = ({
       });
       dispatch({
         type: ACTIONS.CONSOLE_MESSAGE_UPDATE,
-        payload: coinStateLiterals[state.coinState],
+        payload: state.results
+          .slice(-8)
+          .map((result) => coinStateLiterals[result])
+          .join(", "),
       });
       if (resultsConsoleElement.current)
         resultsConsoleElement.current.scrollTop =
@@ -244,7 +247,7 @@ export const Coin = ({
       </ResultNotification>
       {sevenTails && Boolean(state.consoleMessage.length) && (
         <>
-          <h5 style={{ margin: 0 }}>Outcome history:</h5>
+          <h5 style={{ margin: 0 }}>Last 8 coin toss outcomes:</h5>
           <ResultsConsole ref={resultsConsoleElement}>
             {state.consoleMessage}
           </ResultsConsole>

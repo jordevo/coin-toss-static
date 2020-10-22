@@ -50,7 +50,7 @@ export const reducer = (state, action) => {
     case ACTIONS.CONSOLE_MESSAGE_UPDATE:
       return {
         ...state,
-        consoleMessage: `${state.consoleMessage} ${action.payload}`,
+        consoleMessage: action.payload,
       };
     case ACTIONS.CONSOLE_MESSAGE_RESET:
       return { ...state, consoleMessage: INITIAL_STATE.consoleMessage };
