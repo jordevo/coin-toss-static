@@ -13,6 +13,7 @@
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^6.1.0",
@@ -21,6 +22,7 @@
     "react-static-plugin-reach-router": "^7.2.0",
     "react-static-plugin-sitemap": "^7.2.0",
     "react-static-plugin-source-filesystem": "^7.2.0",
+    "react-web-animation": "^0.7.0",
     "styled-components": "^5.2.0",
     "web-animations-js": "^2.3.2"
   },
