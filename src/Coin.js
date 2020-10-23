@@ -176,17 +176,21 @@ export const Coin = ({
         payload: `You got ${coinStateLiterals[state.coinState]}`,
       });
       dispatch({
-        type: ACTIONS.CONSOLE_MESSAGE_UPDATE,
-        payload: state.results
-          .slice(-8)
-          .map((result) => coinStateLiterals[result])
-          .join(", "),
+        type: ACTIONS.SET_LAST_8_RESULTS,
+        payload: coinStateLiterals[state.coinState],
       });
       if (resultsConsoleElement.current)
         resultsConsoleElement.current.scrollTop =
           resultsConsoleElement.current.scrollHeight;
     }
   }, [state.coinState, state.results, state.tossCoin, coinStateLiterals]);
+
+  useEffect(() => {
+    dispatch({
+      type: ACTIONS.CONSOLE_MESSAGE_UPDATE,
+      payload: state.last8results.join(", "),
+    });
+  }, [state.last8results]);
 
   return (
     <>

@@ -19,22 +19,24 @@ export const ACTIONS = {
   TOSS_COIN_UNTIL_TAILS_RESET: "TOSS_COIN_UNTIL_TAILS_RESET",
   RESULTS_UPDATE: "RESULTS_UPDATE",
   RESULTS_RESET: "RESULTS_RESET",
+  SET_LAST_8_RESULTS: "SET_LAST_8_RESULTS",
 };
 
 export const COIN_STATE = { HEADS: "heads", TAILS: "tails" };
 
 export const INITIAL_STATE = {
-  tossCoin: false,
-  tossCoinUntilTails: false,
   coinState: COIN_STATE.HEADS,
   consoleMessage: "",
   headsCount: 0,
   isAnimating: false,
   isAnimatingFast: false,
-  tailsCount: 0,
+  last8results: [],
   numberOfTailsToStop: 7,
-  results: [],
   successMessage: "",
+  tailsCount: 0,
+  tossCoin: false,
+  tossCoinUntilTails: false,
+  results: [],
 };
 
 export const reducer = (state, action) => {
@@ -78,6 +80,12 @@ export const reducer = (state, action) => {
       return { ...state, isAnimatingFast: true };
     case ACTIONS.RESET_ANIMATION_FAST:
       return { ...state, isAnimatingFast: false };
+    case ACTIONS.SET_LAST_8_RESULTS: {
+      return {
+        ...state,
+        last8results: state.last8results.concat([action.payload]).slice(-8),
+      };
+    }
     case ACTIONS.SUCCESS_MESSAGE_UPDATE:
       return { ...state, successMessage: action.payload };
     case ACTIONS.SUCCESS_MESSAGE_RESET:
