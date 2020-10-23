@@ -1,4 +1,7 @@
 export const ACTIONS = {
+  SET_HEADS_LOADED: "SET_HEADS_LOADED",
+  SET_TAILS_LOADED: "SET_TAILS_LOADED",
+  RESET_IMAGES_LOADING: "RESET_IMAGES_LOADING",
   SET_ANIMATION_FAST: "SET_ANIMATION_FAST",
   RESET_ANIMATION_FAST: "RESET_ANIMATION_FAST",
   ANIMATION_STARTS: "ANIMATION_STARTS",
@@ -28,6 +31,8 @@ export const INITIAL_STATE = {
   coinState: COIN_STATE.HEADS,
   consoleMessage: "",
   headsCount: 0,
+  isHeadsLoaded: false,
+  isTailsLoaded: false,
   isAnimating: false,
   isAnimatingFast: false,
   last8results: [],
@@ -80,6 +85,10 @@ export const reducer = (state, action) => {
       return { ...state, isAnimatingFast: true };
     case ACTIONS.RESET_ANIMATION_FAST:
       return { ...state, isAnimatingFast: false };
+    case ACTIONS.SET_HEADS_LOADED:
+      return { ...state, isHeadsLoaded: true };
+    case ACTIONS.SET_TAILS_LOADED:
+      return { ...state, isTailsLoaded: true };
     case ACTIONS.SET_LAST_8_RESULTS: {
       return {
         ...state,

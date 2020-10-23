@@ -14,6 +14,13 @@ import {
   timingHalfFastFlip,
 } from "./animations";
 
+import headsImageSrc from "./img/heads.png";
+import tailsImageSrc from "./img/tails.png";
+import squareImageSrc from "./img/square.png";
+import circleImageSrc from "./img/circle.png";
+import goTrumpImageSrc from "./img/headsTrump.png";
+import banTrumpImageSrc from "./img/tailsTrump.png";
+
 import { ACTIONS, COIN_STATE, INITIAL_STATE, reducer } from "./reducer";
 
 const COIN_HEADS_ID = "coin-heads";
@@ -64,6 +71,21 @@ const COIN_STATE_LITERALS = {
   TRUMP: { [COIN_STATE.HEADS]: "GO-TRUMP!", [COIN_STATE.TAILS]: "BAN-TRUMP!" },
 };
 
+const COIN_STATE_IMAGES = {
+  DEFAULT: {
+    [COIN_STATE.HEADS]: headsImageSrc,
+    [COIN_STATE.TAILS]: tailsImageSrc,
+  },
+  SHAPES: {
+    [COIN_STATE.HEADS]: squareImageSrc,
+    [COIN_STATE.TAILS]: circleImageSrc,
+  },
+  TRUMP: {
+    [COIN_STATE.HEADS]: goTrumpImageSrc,
+    [COIN_STATE.TAILS]: banTrumpImageSrc,
+  },
+};
+
 export const Coin = ({
   sevenTails = false,
   showTrump = false,
@@ -72,9 +94,15 @@ export const Coin = ({
   const resultsConsoleElement = useRef(null);
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
+  const hasLoadedImages = state.isHeadsLoaded && state.isTailsLoaded;
+
   let coinStateLiterals = COIN_STATE_LITERALS.DEFAULT;
   if (showTrump) coinStateLiterals = COIN_STATE_LITERALS.TRUMP;
   if (showShapes) coinStateLiterals = COIN_STATE_LITERALS.SHAPES;
+
+  let coinStateImages = COIN_STATE_IMAGES.DEFAULT;
+  if (showTrump) coinStateImages = COIN_STATE_IMAGES.TRUMP;
+  if (showShapes) coinStateImages = COIN_STATE_IMAGES.SHAPES;
 
   useEffect(() => {
     if (!state.tossCoin || state.isAnimating) return;
@@ -194,25 +222,24 @@ export const Coin = ({
 
   return (
     <>
-      <div className="coin-container">
-        <div
-          className={cx("coin-heads", {
-            "coin-heads-trump": showTrump,
-            "coin-heads-shapes": showShapes,
-          })}
+      <div className={cx("loader", { isHidden: hasLoadedImages })}>loading</div>
+      <div className={cx("coin-container", { isHidden: !hasLoadedImages })}>
+        <img
+          className="coin-heads-image"
+          onLoad={() => dispatch({ type: ACTIONS.SET_HEADS_LOADED })}
+          src={coinStateImages[COIN_STATE.HEADS]}
           id="coin-heads"
           style={{ zIndex: 2 * _getZ(COIN_STATE.HEADS) }}
-        ></div>
-        <div
-          className={cx("coin-tails", {
-            "coin-tails-trump": showTrump,
-            "coin-tails-shapes": showShapes,
-          })}
+        />
+        <img
+          className="coin-tails-image"
+          onLoad={() => dispatch({ type: ACTIONS.SET_TAILS_LOADED })}
+          src={coinStateImages[COIN_STATE.TAILS]}
           id="coin-tails"
           style={{ zIndex: 2 * _getZ(COIN_STATE.TAILS) }}
-        ></div>
+        />
       </div>
-      <div className="buttons-container">
+      <div className={cx("buttons-container", { isHidden: !hasLoadedImages })}>
         <TossButton
           onClick={() => {
             dispatch({ type: ACTIONS.SUCCESS_MESSAGE_RESET });
@@ -242,7 +269,7 @@ export const Coin = ({
           </TossButton>
         )}
       </div>
-      <ResultNotification>
+      <ResultNotification className={cx({ isHidden: !hasLoadedImages })}>
         {(state.headsCount || state.tailsCount) && !state.isAnimating ? (
           <h4>{state.successMessage}</h4>
         ) : (
